@@ -7,11 +7,12 @@ let scope
 
 function checkReturnTo(req, res, next) {
     scope = null
-    req.session.requiredScope = null
+    
     if (!req.session) {
         req.session = {}
     }
-
+    req.session.requiredScope = null
+    
     if (req.query.public === 'true') {
         scope = config.server.github.user_scope.concat()
         req.session.requiredScope = 'public'
