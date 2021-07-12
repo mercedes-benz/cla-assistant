@@ -7,7 +7,7 @@ COPY . /cla-assistant
 WORKDIR /cla-assistant
 
 RUN \
-  apk add --no-cache nodejs su-exec && \
+  apk add --no-cache nodejs npm su-exec && \
   apk add --no-cache --virtual .build-deps git curl bzip2 patch make g++ && \
   addgroup -S cla-assistant && \
   adduser -S -D -G cla-assistant cla-assistant && \
