@@ -33,6 +33,10 @@ async function callGithub(octokit, obj, fun, arg, cacheKey, cacheTime) {
         cache.put(cacheKey, res, 1000 * cacheTime)
     }
 
+    if(obj === 'repos' && fun === 'list' && config.server.github.allowed_orgs.length > 0) {
+        res.data = res.data.filter((repo) => config.server.github.allowed_orgs.indexOf(repo.owner.login) > -1 && repo.owner.type === 'Organization');
+    }
+
     return res
 }
 

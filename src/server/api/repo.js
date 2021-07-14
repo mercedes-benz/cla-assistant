@@ -4,6 +4,7 @@ const logger = require('../services/logger')
 const Joi = require('joi')
 const webhook = require('./webhook')
 const utils = require('../middleware/utils')
+const config = require('../../config')
 
 const REPOCREATESCHEMA = Joi.object().keys({
     owner: Joi.string().required(),
@@ -30,6 +31,13 @@ module.exports = {
     create: async (req) => {
         req.args.token = req.args.token || req.user.token
         utils.validateArgs(req.args, REPOCREATESCHEMA, true)
+
+        if(config.server.github.allowed_orgs.length > 0) {
+            if(config.server.github.allowed_orgs.indexOf(req.args.owner) < 0) {
+                logger.error(req.args.repo + ' is not part of the allowed organizations')
+                throw 'this repository is not part of the allowed organizations'
+            }
+        }
 
         const repoArgs = {
             repo: req.args.repo,

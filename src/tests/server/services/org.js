@@ -34,8 +34,8 @@ describe('org:create', async function () {
         }
         await org.create(arg)
     })
-
 })
+
 describe('org:update', () => {
     afterEach(() => Org.findOne.restore())
 

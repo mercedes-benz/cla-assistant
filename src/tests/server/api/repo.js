@@ -11,6 +11,7 @@ let webhook = require('../../../server/api/webhook')
 
 // api
 let repo_api = require('../../../server/api/repo')
+const config = require('../../../config')
 
 
 describe('repo', () => {
@@ -191,6 +192,16 @@ describe('repo', () => {
                 assert(!repo.getGHRepo.called)
                 assert(repo.create.called)
                 assert(!webhook.create.called)
+            }
+        })
+
+        it('should not link repo when not part of specified orgs', async () => {
+            config.server.github.allowed_orgs=['test']
+            try {
+                await repo_api.create(req)
+                assert(false, 'an error should have been thrown before')
+            } catch (error) {
+                assert(error)
             }
         })
     })

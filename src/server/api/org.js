@@ -7,6 +7,7 @@ const logger = require('../services/logger')
 const utils = require('../middleware/utils')
 //queries
 const queries = require('../graphQueries/github')
+const config = require('../../config')
 const newOrgSchema = Joi.object().keys({
     orgId: Joi.number().required(),
     org: Joi.string().required(),
@@ -28,6 +29,13 @@ class OrgAPI {
     async create(req) {
         req.args.token = req.args.token || req.user.token
         utils.validateArgs(req.args, newOrgSchema, true)
+
+        if(config.server.github.allowed_orgs.length > 0) {
+            if(config.server.github.allowed_orgs.indexOf(req.args.org) < 0) {
+                logger.error(req.args.org + ' is not part of the allowed organizations')
+                throw 'this org is not part of the allowed organizations'
+            }
+        }
 
         const query = {
             orgId: req.args.orgId,
@@ -103,6 +111,11 @@ class OrgAPI {
                     arg.query = queries.getUserOrgs(req.user.login, data.pageInfo.endCursor)
                     return callGithub(arg)
                 }
+
+                if(config.server.github.allowed_orgs.length > 0) {
+                    organizations = organizations.filter((org) => config.server.github.allowed_orgs.indexOf(org.name) > -1)               
+                }
+
                 return organizations
             } catch (error) {
                 log.info(new Error(error).stack)

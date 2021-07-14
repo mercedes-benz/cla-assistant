@@ -17,6 +17,9 @@ const cache = require('memory-cache')
 const callStub = sinon.stub()
 const authenticateStub = sinon.stub()
 
+// test data
+const testData = require('../testData').data
+
 describe('github:call', () => {
     let expectedAuth
     function OctokitMock(args) {
@@ -148,5 +151,18 @@ describe('github:call', () => {
             })
         }
         sinon.assert.calledOnce(callStub)
+    })
+
+    it('should return only org specific results when allowed orgs is set', async () => {
+        callStub.resolves({ data: testData.orgRepos, headers: {} })
+
+        config.server.github.allowed_orgs=['octokit']
+
+        const res = await github.call({
+            obj: 'obj',
+            fun: 'fun',
+        })
+
+        assert.equal(res.data, testData.orgRepos)
     })
 })

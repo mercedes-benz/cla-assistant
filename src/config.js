@@ -28,6 +28,9 @@ module.exports = {
             // required
             token: process.env.GITHUB_TOKEN,
 
+            //optional
+            allowed_orgs: process.env.GITHUB_ALLOWED_ORGANIZATIONS ? process.env.GITHUB_ALLOWED_ORGANIZATIONS.split(/\s*,\s*/) : [],
+
             //temporary, not required
             token_old: process.env.GITHUB_TOKEN_OLD,
 
