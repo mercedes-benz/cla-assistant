@@ -4,7 +4,7 @@
 
 const express = require('express')
 const path = require('path')
-const config = require('../../config')
+const config = require('../config')
 const { couldBeAdmin, adminModeEnabled } = require('../middleware/utils')
 const cla = require('./../api/cla')
 const logger = require('./../services/logger')
