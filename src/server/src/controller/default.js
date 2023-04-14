@@ -74,29 +74,31 @@ router.get('/check/:owner/:repo', (req, res) => {
 })
 
 router.all('/*', (req, res) => {
+    let filePath
     res.setHeader('Last-Modified', (new Date()).toUTCString())
 
     if (req.path === '/robots.txt') {
         return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'robots.txt'))
     } else if (req.user) {
         if (req.path !== '/') {
-            return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'home.html'))
+            return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'home.html'))
         }
         if (adminModeEnabled() && couldBeAdmin(req.user.login)) {
             return routeBasedOnWriteRepoHookPermission(req, res)
         } else if(adminModeEnabled()) {
-            return res.redirect(302, '/cla')
+            return res.status(200).sendFile( config.server.templates.login )
         }
         return routeBasedOnWriteRepoHookPermission(req, res)
     }
-    return res.status(200).sendFile(config.server.templates.login)
+    return res.status(200).sendFile( config.server.templates.login )
 })
+
 
 function routeBasedOnWriteRepoHookPermission(req, res) {
     if(req.user.scope && req.user.scope.indexOf('write:repo_hook') > -1) {
-        return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'home.html'))
+        return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'home.html'))
     }
-    return res.redirect(302, '/cla')
+    return res.status(200).sendFile( config.server.templates.login )
 }
 
 module.exports = router
