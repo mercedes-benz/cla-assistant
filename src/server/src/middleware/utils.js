@@ -1,13 +1,15 @@
-// SPDX-FileCopyrightText: 2022 SAP SE or an SAP affiliate company and CLA-assistant contributors
-//
-// SPDX-License-Identifier: Apache-2.0
-
 const githubService = require('../services/github')
 const log = require('../services/logger')
+const Joi = require('joi')
+const config = require('../../config')
 
 class Utils {
     couldBeAdmin(username) {
         return config.server.github.admin_users.length === 0 || config.server.github.admin_users.indexOf(username) >= 0
+    }
+
+    adminModeEnabled() {
+        return config.server.github.admin_users.length > 0
     }
 
     async checkRepoPushPermissionByName(repo, owner, repoId, token) {
@@ -60,7 +62,7 @@ class Utils {
         try {
             const res = await githubService.call({
                 obj: 'orgs',
-                fun: 'getMembershipForUser',
+                fun: 'getMembership',
                 arg: {
                     org: org,
                     username: username
@@ -85,7 +87,7 @@ class Utils {
     }
 
     validateArgs(args, schema, allowUnknown = false, convert = true) {
-        const joiRes = schema.validate(args, { abortEarly: false, allowUnknown, convert })
+        const joiRes = Joi.validate(args, schema, { abortEarly: false, allowUnknown, convert })
         if (joiRes.error) {
             joiRes.error.code = 400
             throw joiRes.error
