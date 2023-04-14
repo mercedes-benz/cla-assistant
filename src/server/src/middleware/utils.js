@@ -1,7 +1,7 @@
 const githubService = require('../services/github')
 const log = require('../services/logger')
 const Joi = require('joi')
-const config = require('../../config')
+const config = require('../config')
 
 class Utils {
     couldBeAdmin(username) {
