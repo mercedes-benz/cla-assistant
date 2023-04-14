@@ -85,7 +85,7 @@ router.all('/*', (req, res) => {
         if (adminModeEnabled() && couldBeAdmin(req.user.login)) {
             return routeBasedOnWriteRepoHookPermission(req, res)
         } else if(adminModeEnabled()) {
-            return res.redirect(302, '/my-cla')
+            return res.redirect(302, '/cla')
         }
         return routeBasedOnWriteRepoHookPermission(req, res)
     }
@@ -96,7 +96,7 @@ function routeBasedOnWriteRepoHookPermission(req, res) {
     if(req.user.scope && req.user.scope.indexOf('write:repo_hook') > -1) {
         return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'home.html'))
     }
-    return res.redirect(302, '/my-cla')
+    return res.redirect(302, '/cla')
 }
 
 module.exports = router
