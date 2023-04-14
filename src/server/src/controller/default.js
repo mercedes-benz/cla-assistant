@@ -4,6 +4,8 @@
 
 const express = require('express')
 const path = require('path')
+const config = require('../../config')
+const { couldBeAdmin, adminModeEnabled } = require('../middleware/utils')
 const cla = require('./../api/cla')
 const logger = require('./../services/logger')
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -72,17 +74,29 @@ router.get('/check/:owner/:repo', (req, res) => {
 })
 
 router.all('/*', (req, res) => {
-    let filePath
-    if (req.path === '/robots.txt') {
-        filePath = path.join(__dirname, '..', '..', '..', 'client', 'assets', 'robots.txt')
-    }
-    else if ((req.user && req.user.scope && req.user.scope.indexOf('write:repo_hook') > -1) || req.path !== '/') {
-        filePath = path.join(__dirname, '..', '..', '..', 'client', 'assets', 'home.html')
-    } else {
-        filePath = config.server.templates.login
-    }
     res.setHeader('Last-Modified', (new Date()).toUTCString())
-    res.status(200).sendFile(filePath)
+
+    if (req.path === '/robots.txt') {
+        return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'robots.txt'))
+    } else if (req.user) {
+        if (req.path !== '/') {
+            return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'home.html'))
+        }
+        if (adminModeEnabled() && couldBeAdmin(req.user.login)) {
+            return routeBasedOnWriteRepoHookPermission(req, res)
+        } else if(adminModeEnabled()) {
+            return res.redirect(302, '/my-cla')
+        }
+        return routeBasedOnWriteRepoHookPermission(req, res)
+    }
+    return res.status(200).sendFile(config.server.templates.login)
 })
+
+function routeBasedOnWriteRepoHookPermission(req, res) {
+    if(req.user.scope && req.user.scope.indexOf('write:repo_hook') > -1) {
+        return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'home.html'))
+    }
+    return res.redirect(302, '/my-cla')
+}
 
 module.exports = router
