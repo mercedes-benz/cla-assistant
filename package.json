@@ -76,7 +76,7 @@
         "load-grunt-tasks": "^5.1.0",
         "mkdirp": "3.0.0",
         "mocha": "^10.2.0",
-        "rewire": "^6.0.6",
+        "rewire": "^6.0.0",
         "sass": "^1.62.0",
         "should": "^13.2.3",
         "sinon": "^15.0.4",
