@@ -1,5 +1,9 @@
+// SPDX-FileCopyrightText: 2022 SAP SE or an SAP affiliate company and CLA-assistant contributors
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*eslint no-unused-expressions: "off", no-empty-function: "off"*/
-/*global angular, describe, xit, it, beforeEach, afterEach*/
+/*global angular, describe, it, beforeEach, afterEach*/
 
 describe('Home Controller', function () {
     var scope, httpBackend, createCtrl, homeCtrl, $HUB, $RAW, $RPCService, _timeout;
@@ -123,7 +127,6 @@ describe('Home Controller', function () {
     var expErr;
     var getAllReposData;
     var getAllReposError;
-    var rpcRepoGetAllData;
     var rpcRepoGetAllError;
     var rpcRepoCreate;
 
@@ -186,7 +189,7 @@ describe('Home Controller', function () {
                     }]);
             } else if (obj === 'users' && fun === 'getOrgs') {
                 response.value = expRes.HUB ? expRes.HUB.listUserOrgs : testDataOrgs;
-            } else if (obj === 'repos' && fun === 'list') {
+            } else if (obj === 'repos' && fun === 'listForAuthenticatedUser') {
                 response = getAllReposData || {
                     value: testDataRepos
                 };
@@ -317,7 +320,6 @@ describe('Home Controller', function () {
         $RPCService.call.restore();
         getAllReposData = undefined;
         getAllReposError = undefined;
-        rpcRepoGetAllData = undefined;
         rpcRepoGetAllError = undefined;
     });
 

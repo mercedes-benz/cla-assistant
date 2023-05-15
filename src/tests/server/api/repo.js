@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2022 SAP SE or an SAP affiliate company and CLA-assistant contributors
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*eslint no-empty-function: "off"*/
 /*global describe, it, beforeEach, afterEach*/
 
@@ -6,11 +10,11 @@ let assert = require('assert')
 let sinon = require('sinon')
 
 // module
-let repo = require('../../../server/services/repo')
-let webhook = require('../../../server/api/webhook')
+let repo = require('../../../server/src/services/repo')
+let webhook = require('../../../server/src/api/webhook')
 
 // api
-let repo_api = require('../../../server/api/repo')
+let repo_api = require('../../../server/src/api/repo')
 
 
 describe('repo', () => {
@@ -302,6 +306,18 @@ describe('repo', () => {
         })
 
         it('should remove repo entry and webhook when unlink a repo', async () => {
+            await repo_api.remove(req)
+            assert(req.args.owner)
+            assert(req.args.repo)
+            assert(repo.remove.called)
+            assert(webhook.remove.called)
+        })
+
+        it('should gracefully handle when webhook removal fails', async () => {
+            webhook.remove.restore()
+            sinon.stub(webhook, 'remove').callsFake(async () => {
+                throw 'No webhook found with base url https://test-cla.com/webhook'
+            })
             await repo_api.remove(req)
             assert(req.args.owner)
             assert(req.args.repo)

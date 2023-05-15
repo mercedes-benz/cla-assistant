@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2022 SAP SE or an SAP affiliate company and CLA-assistant contributors
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*global describe, it, beforeEach, afterEach*/
 
 // unit test
@@ -5,16 +9,16 @@ const assert = require('assert')
 const sinon = require('sinon')
 
 // service
-const org = require('../../../server/services/org')
-const github = require('../../../server/services/github')
-const logger = require('../../../server/services/logger')
-const webhook = require('../../../server/api/webhook')
+const org = require('../../../server/src/services/org')
+const github = require('../../../server/src/services/github')
+const logger = require('../../../server/src/services/logger')
+const webhook = require('../../../server/src/api/webhook')
 
 // test data
 const testData = require('../testData').data
 
 // api
-const org_api = require('../../../server/api/org')
+const org_api = require('../../../server/src/api/org')
 
 
 describe('org api', () => {
@@ -48,7 +52,7 @@ describe('org api', () => {
             if (testErr.githubCallGraphql) {
                 throw new Error(testErr.githubCallGraphql)
             }
-            return JSON.stringify(testRes.githubCallGraphql.body)
+            return testRes.githubCallGraphql.body
         })
         sinon.stub(github, 'call').callsFake(async (args) => {
             if (args.fun === 'getOrgs') {

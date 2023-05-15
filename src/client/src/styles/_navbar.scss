@@ -1,0 +1,132 @@
+/*
+ * SPDX-FileCopyrightText: 2022 SAP SE or an SAP affiliate company and CLA-assistant contributors
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+$navbar-default-bg: $body-bg;
+/*$navbar-default-color: $gray-darkest;
+$navbar-default-link-color: $gray-darkest;
+$navbar-default-link-hover-color: $gray-darker;
+$navbar-default-brand-hover-color: $gray;
+$navbar-default-link-active-color: $gray;*/
+$navbar-margin-bottom: 0;
+$nav-link-padding: 15px 20px 15px 0px;
+
+$grid-float-breakpoint: 100px;
+
+$navbar-height: 60px;
+$footer-height: $navbar-height;
+
+.navbar a{
+	text-decoration: none;
+}
+
+
+.navbar-default {
+	border-color: white;
+
+	.container-fluid{
+		height: $navbar-height;
+		margin: 0px;
+		padding-top: 15px;
+	}
+}
+
+.navbar-default .navbar-text {
+  	color: $gray-darkest;
+	margin: 0;
+}
+
+.navbar-home-right{
+	text-align: right;
+}
+
+.navbar-home-left{
+	text-align: left;
+	//margin-left: 0px
+}
+
+.navbar-fixed-bottom {
+	position: absolute;
+  	bottom: 0;
+  	width: 100%;
+	border: transparent;
+	color: $navbar-default-color;
+}
+
+.navbar-top-border {
+	height: 1px;
+	margin: 0px 15px;
+	background: $brand-primary-lightest;
+}
+
+.navbar-left:first-child {
+	margin-left: 0px;
+}
+.navbar{
+	min-height: $navbar-height;
+}
+
+.navbar-center {
+	position: absolute;
+	left: 0;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	text-align: center;
+	z-index:-1
+}
+
+@media(max-width: 767px) {
+	.navbar-text {
+		margin: 0px;
+	}
+	.navbar-default .container-fluid{
+			padding-top: 0px;
+	}
+
+	.navbar-fixed-top .container-fluid{
+			padding: 15px;
+	}
+
+
+	.navbar-text-hide{
+		visibility: hidden;
+	}
+
+	.navbar-left {
+		text-align: center;
+		margin: 0px;
+	}
+}
+
+@media (min-width: 992px) {
+	.navbar-top-space {
+		margin-top: 55px;
+	}
+}
+
+.nav-justified>li, .nav-justified>.nav-tabs.nav-justified {
+  bottom: -1px;
+}
+
+nav {
+	margin-top: 10px;
+}
+
+nav .nav-justified>li>a {
+  	color: $gray;
+}
+
+.nav-justified>.active>a,
+.nav>li>a:hover,
+.nav>li>a:focus {
+	background-color: transparent;
+}
+
+.nav-justified>.active>a,
+.nav>li>a:hover {
+	color: $gray-darkest;
+	border-bottom: solid;
+}

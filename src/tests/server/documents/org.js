@@ -1,5 +1,9 @@
+// SPDX-FileCopyrightText: 2022 SAP SE or an SAP affiliate company and CLA-assistant contributors
+//
+// SPDX-License-Identifier: Apache-2.0
+
 const assert = require('assert')
-const Org = require('../../../server/documents/org').Org
+const Org = require('../../../server/src/documents/org').Org
 
 // test data
 const testData = require('../testData').data

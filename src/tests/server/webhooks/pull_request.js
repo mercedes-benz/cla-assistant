@@ -1,22 +1,26 @@
+// SPDX-FileCopyrightText: 2022 SAP SE or an SAP affiliate company and CLA-assistant contributors
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*eslint no-empty-function: "off"*/
 // unit test
 const assert = require('assert')
 const sinon = require('sinon')
 
 // services
-const pullRequest = require('../../../server/services/pullRequest')
-const status = require('../../../server/services/status')
-const cla = require('../../../server/services/cla')
-const repoService = require('../../../server/services/repo')
-const orgService = require('../../../server/services/org')
-const logger = require('../../../server/services/logger')
+const pullRequest = require('../../../server/src/services/pullRequest')
+const status = require('../../../server/src/services/status')
+const cla = require('../../../server/src/services/cla')
+const repoService = require('../../../server/src/services/repo')
+const orgService = require('../../../server/src/services/org')
+const logger = require('../../../server/src/services/logger')
 
-const config = require('../../../config')
+const config = require('../../../server/src/config')
 
-const User = require('../../../server/documents/user').User
+const User = require('../../../server/src/documents/user').User
 
 // webhook under test
-const webhook = require('../../../server/webhooks/pull_request')
+const webhook = require('../../../server/src/webhooks/pull_request')
 
 function pull_request(req, res) {
     if (webhook.accepts(req)) {

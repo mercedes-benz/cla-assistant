@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2022 SAP SE or an SAP affiliate company and CLA-assistant contributors
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*global describe, it, beforeEach, afterEach*/
 
 // unit test
@@ -5,10 +9,10 @@ const assert = require('assert')
 const sinon = require('sinon')
 
 // services
-const github = require('../../../server/services/github')
+const github = require('../../../server/src/services/github')
 
 // service under test
-const status = require('../../../server/services/status')
+const status = require('../../../server/src/services/status')
 
 const testData = {
     'id': 1,
@@ -309,7 +313,7 @@ describe('status', () => {
             if (args.obj === 'pulls' && args.fun === 'get') {
                 assert(args.token)
                 return githubCallPRGet
-            } else if (args.obj === 'repos' && args.fun === 'listStatusesForRef') {
+            } else if (args.obj === 'repos' && args.fun === 'listCommitStatusesForRef') {
                 assert.equal(args.token, 'abc')
                 return githubCallStatusGet
             } else if (args.obj === 'repos' && args.fun === 'getCombinedStatusForRef') {
@@ -436,7 +440,7 @@ describe('status', () => {
             assert(github.call.calledOnce)
             assert(github.call.calledWithMatch({
                 obj: 'repos',
-                fun: 'listStatusesForRef'
+                fun: 'listCommitStatusesForRef'
             }))
 
 
@@ -514,7 +518,7 @@ describe('status', () => {
             await status.updateForNullCla(args)
             assert(github.call.calledWithMatch({
                 obj: 'repos',
-                fun: 'createStatus',
+                fun: 'createCommitStatus',
             }))
         })
 
@@ -523,7 +527,7 @@ describe('status', () => {
             await status.updateForNullCla(args)
             assert(github.call.calledWithMatch({
                 obj: 'repos',
-                fun: 'createStatus'
+                fun: 'createCommitStatus'
             }))
         })
 
@@ -532,7 +536,7 @@ describe('status', () => {
             await status.updateForNullCla(args)
             assert(github.call.calledWithMatch({
                 obj: 'repos',
-                fun: 'createStatus'
+                fun: 'createCommitStatus'
             }))
         })
 
@@ -595,7 +599,7 @@ describe('status', () => {
             await status.updateForClaNotRequired(args)
             assert(github.call.calledWithMatch({
                 obj: 'repos',
-                fun: 'createStatus'
+                fun: 'createCommitStatus'
             }))
         })
 
@@ -605,7 +609,7 @@ describe('status', () => {
             assert(github.call.called)
             assert(github.call.calledWithMatch({
                 obj: 'repos',
-                fun: 'createStatus'
+                fun: 'createCommitStatus'
             }))
         })
 
@@ -614,7 +618,7 @@ describe('status', () => {
             await status.updateForClaNotRequired(args)
             assert(!github.call.calledWithMatch({
                 obj: 'repos',
-                fun: 'createStatus'
+                fun: 'createCommitStatus'
             }))
         })
 

@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2022 SAP SE or an SAP affiliate company and CLA-assistant contributors
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*global describe, it, beforeEach, afterEach*/
 
 // unit test
@@ -5,12 +9,12 @@ const assert = require('assert')
 const sinon = require('sinon')
 
 // services
-const github = require('../../../server/services/github')
-const logger = require('../../../server/services/logger')
-const cla_config = require('../../../config')
+const github = require('../../../server/src/services/github')
+const logger = require('../../../server/src/services/logger')
+const cla_config = require('../../../server/src/config')
 
 // service under test
-const pullRequest = require('../../../server/services/pullRequest')
+const pullRequest = require('../../../server/src/services/pullRequest')
 
 const testDataComments_withCLAComment = [{
     'url': 'https://api.github.com/repos/octocat/Hello-World/pulls/comments/1',
@@ -501,7 +505,7 @@ describe('pullRequest:getComment', () => {
             number: 1
         }
         try {
-            pullRequest.getComment(args)
+            await pullRequest.getComment(args)
             assert(false, 'should have thrown an error')
         } catch (error) {
             assert(error)

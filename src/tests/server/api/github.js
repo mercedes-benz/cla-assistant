@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2022 SAP SE or an SAP affiliate company and CLA-assistant contributors
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*global describe, it, beforeEach, afterEach*/
 
 // unit test
@@ -5,10 +9,10 @@ const assert = require('assert')
 const sinon = require('sinon')
 
 // api
-const github_api = require('../../../server/api/github')
+const github_api = require('../../../server/src/api/github')
 
 // module
-const github = require('../../../server/services/github')
+const github = require('../../../server/src/services/github')
 
 describe('github:call', () => {
     beforeEach(() => sinon.stub(github, 'call').callsFake(async args => {

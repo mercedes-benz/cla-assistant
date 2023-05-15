@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2022 SAP SE or an SAP affiliate company and CLA-assistant contributors
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*eslint no-unused-expressions: "off", no-empty-function: "off"*/
 /*global describe, it, beforeEach, afterEach*/
 
@@ -6,16 +10,16 @@ const assert = require('assert')
 const sinon = require('sinon')
 
 //model
-const Repo = require('../../../server/documents/repo').Repo
+const Repo = require('../../../server/src/documents/repo').Repo
 
 //services
-const github = require('../../../server/services/github')
-const orgService = require('../../../server/services/org')
-const logger = require('../../../server/services/logger')
-const queries = require('../../../server/graphQueries/github')
+const github = require('../../../server/src/services/github')
+const orgService = require('../../../server/src/services/org')
+const logger = require('../../../server/src/services/logger')
+const queries = require('../../../server/src/graphQueries/github')
 
 // service under test
-const repo = require('../../../server/services/repo')
+const repo = require('../../../server/src/services/repo')
 
 // test data
 const testData = require('../testData').data
@@ -209,7 +213,7 @@ describe('repo:getPRCommitters', () => {
             if (githubCallGraphqlRes.getPRCommitters.err) {
                 throw new Error(githubCallGraphqlRes.getPRCommitters.err)
             }
-            return JSON.stringify(githubCallGraphqlRes.getPRCommitters.body)
+            return githubCallGraphqlRes.getPRCommitters.body
         })
 
         sinon.stub(orgService, 'get').callsFake(async () => testOrg)
@@ -489,7 +493,7 @@ describe('repo:getPRCommitters', () => {
         github.callGraphql.onFirstCall().rejects({
             message: 'Moved Permanently'
         })
-        github.callGraphql.onSecondCall().resolves(JSON.stringify(githubCallGraphqlRes.getPRCommitters.body))
+        github.callGraphql.onSecondCall().resolves(githubCallGraphqlRes.getPRCommitters.body)
 
         sinon.stub(repo, 'getGHRepo').callsFake(async () => {
             return {
@@ -562,7 +566,7 @@ describe('repo:getUserRepos', () => {
             }]
         }
         sinon.stub(github, 'call').callsFake(async (args) => {
-            if (args.obj == 'repos' && args.fun == 'list') {
+            if (args.obj == 'repos' && args.fun == 'listForAuthenticatedUser') {
                 if (githubCallRes.err) {
                     throw new Error(githubCallRes.err)
                 }

@@ -1,0 +1,64 @@
+/*
+ * SPDX-FileCopyrightText: 2022 SAP SE or an SAP affiliate company and CLA-assistant contributors
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+.hint {
+	color: $gray;
+}
+
+.separator {
+	width: 100%;
+	height: 1px;
+	background-color: white;
+	display: flex;
+}
+
+.settings h4,
+.settings .h4 {
+	color: $text-color;
+}
+
+.settings {
+	img {
+		height: 1.5em;
+		min-height: 15px;
+	}
+
+	.btn {
+		margin-top: 5px;
+		width: 100%
+	}
+
+	.btn:first-of-type {
+		margin-top: 0px;
+	}
+}
+
+
+.settings img.org {
+	height: 1em;
+	vertical-align: inherit;
+}
+
+.settings {
+	.action {
+		padding: 0;
+	}
+
+	.action-icon {
+		float: right;
+		font-size: 18px;
+		margin-right: 15px;
+	}
+
+	.action-icon:first-of-type {
+		margin-right: 0;
+	}
+
+	.edit-icon {
+		text-align: right;
+		padding-right: 30px;
+	}
+}

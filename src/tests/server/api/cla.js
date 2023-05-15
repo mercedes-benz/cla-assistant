@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2022 SAP SE or an SAP affiliate company and CLA-assistant contributors
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*eslint no-empty-function: "off"*/
 /*global describe, it, beforeEach, afterEach*/
 
@@ -6,26 +10,26 @@ const assert = require('assert')
 const sinon = require('sinon')
 
 // config
-global.config = require('../../../config')
+global.config = require('../../../server/src/config')
 
 // models
-const Repo = require('../../../server/documents/repo').Repo
-const User = require('../../../server/documents/user').User
+const Repo = require('../../../server/src/documents/repo').Repo
+const User = require('../../../server/src/documents/user').User
 
 //services
-const github = require('../../../server/services/github')
-const cla = require('../../../server/services/cla')
-const repo_service = require('../../../server/services/repo')
-const org_service = require('../../../server/services/org')
-const statusService = require('../../../server/services/status')
-const prService = require('../../../server/services/pullRequest')
-const log = require('../../../server/services/logger')
+const github = require('../../../server/src/services/github')
+const cla = require('../../../server/src/services/cla')
+const repo_service = require('../../../server/src/services/repo')
+const org_service = require('../../../server/src/services/org')
+const statusService = require('../../../server/src/services/status')
+const prService = require('../../../server/src/services/pullRequest')
+const log = require('../../../server/src/services/logger')
 
 // Test data
 const testData = require('../testData').data
 
 // api
-const cla_api = require('../../../server/api/cla')
+const cla_api = require('../../../server/src/api/cla')
 
 describe('', () => {
     let reqArgs
@@ -178,7 +182,7 @@ describe('', () => {
                     return {
                         data: resp.github.callUser.two
                     }
-                } else if (args.fun === "getAuthenticated") {
+                } else if (args.fun === 'getAuthenticated') {
                     return {
                         data: resp.github.callUser.one
                     }
@@ -1797,7 +1801,7 @@ describe('', () => {
                 args: {
                     _id: 1234,
                     userId: 1,
-                    
+
                     repo: 'Hello-World',
                     owner: 'octocat',
                 },
@@ -1832,7 +1836,7 @@ describe('', () => {
                 }
             }
             try {
-                cla_api.revoke(req)
+                await cla_api.revoke(req)
                 assert(false, 'should throw an error')
             } catch (error) {
                 assert(error)

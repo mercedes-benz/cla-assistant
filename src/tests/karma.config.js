@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2022 SAP SE or an SAP affiliate company and CLA-assistant contributors
+//
+// SPDX-License-Identifier: Apache-2.0
+
 // Karma configuration
 
 module.exports = function (config) {
@@ -25,17 +29,13 @@ module.exports = function (config) {
 
             'http://cdnjs.cloudflare.com/ajax/libs/sinon.js/1.7.3/sinon-min.js',
 
-            'src/bower/should/should.js',
+            // node_modules
+            'node_modules/should/should.js',
+            'node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
+            'node_modules/angular-mocks/angular-mocks.js',
 
-            // Bower
-            'src/bower/bootstrap-sass-official/assets/javascripts/bootstrap.js',
-            'src/bower/angular-mocks/angular-mocks.js',
-
-            // Client code
-            'src/client/app.js',
-            'src/client/api.js',
-            'src/client/services/**/*.js',
-            'src/client/controller/**/*.js',
+            // Client code (minified)
+            'src/client/dist/app.min.js',
 
             // Client templates
             'src/client/**/*.html',
@@ -92,13 +92,11 @@ module.exports = function (config) {
 
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-        browsers: ['PhantomJS'],
-        // browsers: ['Chrome'],
+        browsers: ['ChromeHeadless'],
         plugins: [
             'karma-ng-html2js-preprocessor',
             'karma-mocha',
-            // 'karma-chrome-launcher'
-            'karma-phantomjs-launcher',
+            'karma-chrome-launcher'
         ],
 
 

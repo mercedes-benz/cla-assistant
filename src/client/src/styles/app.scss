@@ -1,0 +1,632 @@
+/*
+ * SPDX-FileCopyrightText: 2022 SAP SE or an SAP affiliate company and CLA-assistant contributors
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+// overwrite bootstrap styles
+
+// fonts
+$font-family-sans-serif: 'Source Sans Pro', sans-serif;
+
+// colours
+$gray-darkest: #2c3e50;
+$gray-darker: #666;
+$gray-dark: #999;
+$gray: #ddd;
+$gray-light: #ececec;
+$gray-lighter: #f5f5f5;
+$white: #fff;
+$green: #39b54a;
+
+// brand colours
+$brand-primary-lightest: #ffffff;
+$brand-primary-lighter: #e2f1fc;
+$brand-primary: #0594c6;
+/*$brand-primary: #77acc3;*/
+$brand-primary-darker: #4d8fac;
+$brand-primary-darkest: #2c3e50;
+$brand-accent: #ee524f;
+$brand-primary-2nd: #9fcdc8;
+$brand-primary-muted: #abd5d5;
+$brand-primary-hover: #2c827c;
+$brand-warning: #ffa159;
+$brand-danger: #ee524f;
+$brand-info: #deefef;
+$brand-merged: #6e5494;
+$link-color: #3c3c3d;
+
+// body
+$body-bg: $gray-lighter;
+
+// typography
+$text-color: $brand-primary-darkest;
+$text-gray: $gray-darker;
+$text-primary: $brand-primary;
+$text-invert: #fff;
+$link-color: $gray-darker;
+$link-hover-color: #3c3c3d;
+
+// headings
+$headings-font-weight: 100;
+$headings-color: $gray-darkest;
+
+// forms
+$input-border: $gray-light;
+$input-color: $gray-darker;
+$input-color-placeholder: $gray;
+
+// panels
+$panel-bg: transparent;
+$panel-default-text: $gray-darker;
+$panel-default-border: $gray-light;
+$panel-default-text: $gray-darker;
+$panel-default-heading-bg: $gray-lighter;
+
+// dropdown
+$dropdown-link-color: $gray-darker;
+$dropdown-link-hover-color: darken($gray-darker, 5%);
+
+// components
+$border-radius-small: 0;
+$border-radius-base: 0;
+$border-radius-large: 0;
+$component-active-bg: $gray-light;
+$component-active-color: #555;
+
+// buttons
+$btn-info-bg: #d0eaea;
+$btn-info-color: $brand-primary;
+$btn-default-border: #ececec;
+$btn-default-color: $brand-primary-darkest;
+$btn-primary-bg: $brand-primary-lightest;
+$btn-primary-color: $brand-primary-darkest;
+
+// wells
+$well-bg: $white;
+$well-border: transparent;
+
+// list group
+$list-group-hover-bg: $gray-light;
+$list-group-border: transparent;
+
+// table
+$table-bg: $gray-lighter;
+$table-bg-hover: $gray-light;
+$table-cell-padding: 20px 25px;
+$table-border-color: transparent;
+
+// tabs
+$nav-tabs-active-link-hover-color: $brand-primary;
+$nav-tabs-border-color: $gray-light;
+$nav-tabs-link-hover-border-color: $gray-light;
+$nav-tabs-active-link-hover-border-color: $gray-light;
+$nav-tabs-active-link-hover-bg: $gray-lighter;
+
+//margin
+$margin-small: 15px;
+$margin-medium: 30px;
+
+// navbar
+
+// breadcrumb
+$breadcrumb-bg: transparent;
+$breadcrumb-color: $brand-primary;
+$breadcrumb-active-color: $brand-primary;
+$breadcrumb-separator: ' ';
+
+// label
+$label-default-bg: $brand-info;
+$label-color: $brand-primary;
+
+// import bootstrap
+@import '../../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap.scss';
+
+// import our files
+@import 'animation';
+@import 'breadcrumb';
+@import 'browser';
+@import 'btn';
+@import 'landing-page';
+@import 'link';
+@import 'list-group';
+@import 'modal';
+@import 'navbar';
+@import 'panel';
+@import 'settings';
+@import 'table';
+@import 'tabs';
+@import 'well';
+
+
+//
+// Heights used in calculations below:
+// 52px: navbar height
+// 48px: issues panel header
+//
+
+html {
+  position: absolute;
+  min-height: 100%;
+  width: 100%;
+}
+
+body {
+  margin-bottom: $footer-height;
+}
+
+// typography
+
+body {
+  font-weight: 300;
+}
+
+h2 {
+  margin-top: 30px;
+}
+
+h3,
+h4 {
+  font-weight: 200;
+  margin-top: 10px;
+  font-size: 1.6em;
+}
+
+h4 {
+  margin: 25px 0;
+  padding-left: 0;
+}
+
+label,
+.checkbox label {
+  margin-top: $margin-small;
+  font-weight: 100;
+}
+
+.radio label {
+  margin-top: 0px;
+  font-weight: 100;
+}
+
+label.required:after,
+.checkbox label.required:after,
+.radio label.required:after {
+  content: " *";
+}
+
+.text-body {
+  color: $text-color;
+}
+
+.text-primary.muted {
+  color: $brand-primary-muted;
+}
+
+.text-primary {
+  color: $brand-primary;
+}
+
+.text-invert {
+  color: $text-invert;
+}
+
+.text-danger {
+  color: $brand-danger;
+}
+
+img.muted {
+  opacity: 0.5;
+}
+
+.text-warning {
+  color: $brand-warning;
+}
+
+.text-danger {
+  color: $brand-danger;
+}
+
+.text-info {
+  color: $brand-info;
+}
+
+.text-gray {
+  color: $gray-darker;
+}
+
+.text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 0px;
+  /*margin-top:0.25em*/
+}
+
+// Font Awesome and Octicons
+
+i.fa-times,
+i.fa-plus,
+i.fa-plus-circle,
+i.fa-info,
+i.fa-link {
+  cursor: pointer;
+}
+
+i.fa.action-icon {
+  color: $gray-darker;
+  cursor: pointer;
+}
+
+i.fa.hover-icon {
+  cursor: pointer;
+}
+
+.octicon {
+  font-size: 16px;
+}
+
+.octicon-large {
+  font-size: 1.33333333em;
+}
+
+.octicon-rotate {
+  -ms-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+a {
+  color: inherit;
+}
+
+a.highlighted-link {
+  text-decoration: underline;
+}
+
+small {
+  vertical-align: middle;
+}
+
+// Helper classes
+
+.center-block {
+  text-align: center;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.close-button {
+  float: right;
+  color: $gray-darker;
+  cursor: pointer;
+}
+
+// _cla
+.cla-box {
+  border: 1px solid $gray-light;
+  border-radius: 5px;
+  background-color: $white;
+}
+
+a.anchor .octicon-link {
+  width: 0;
+  visibility: hidden;
+}
+
+.dots {
+  font-size: 10px;
+  margin-left: 10px;
+  color: $gray;
+}
+
+// _activate cla screen
+
+.selectize-input {
+  height: 33px;
+}
+
+.selectize-dropdown .optgroup-header {
+  color: $gray-dark;
+}
+
+.selectize-dropdown [data-selectable] {
+  margin-left: 10px;
+}
+
+.ui-view-content {
+  margin-top: $navbar-height;
+  margin-bottom: $footer-height;
+}
+
+.content-block {
+  /*height:100vH;*/
+  padding-top: $line-height-computed;
+  margin-bottom: 2 * $line-height-computed;
+}
+
+.content-block .row .right-side {
+  border-left: solid 1px;
+  border-color: $gray;
+}
+
+.clear-button {
+  border: 0px;
+  background-color: transparent;
+  position: absolute;
+  right: 30px;
+  color: $gray-darker;
+}
+
+.spin-img {
+  /*position: absolute;*/
+  height: 60px;
+  margin: -30px 0 0 -30px;
+  -webkit-animation: spin 4s linear infinite;
+  -moz-animation: spin 4s linear infinite;
+  animation: spin 4s linear infinite;
+}
+
+.loading-indicator {
+  position: fixed;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.center-div {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.center-div .spin-img {
+  top: -60px;
+}
+
+.spin-img.ng-hide-add-active {
+  display: none !important;
+}
+
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes shake {
+  90% {
+    -moz-transform: rotate(-1deg);
+  }
+
+  100% {
+    -moz-transform: rotate(1deg);
+  }
+}
+
+@-webkit-keyframes shake {
+  90% {
+    -webkit-transform: rotate(-1deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(1deg);
+  }
+}
+
+@keyframes shake {
+  90% {
+    -webkit-transform: rotate(-1deg);
+    transform: rotate(-1deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(1deg);
+    transform: rotate(1deg);
+  }
+}
+
+// _remove_cla
+
+@keyframes fall {
+  from {
+    top: 19px;
+  }
+
+  to {
+    top: 119px;
+  }
+}
+
+@-webkit-keyframes fall {
+  from {
+    top: 19px;
+  }
+
+  to {
+    top: 119px;
+  }
+}
+
+@keyframes fall2 {
+  from {
+    top: 19px;
+  }
+
+  to {
+    top: 100px;
+  }
+}
+
+@-webkit-keyframes fall2 {
+  from {
+    top: 19px;
+  }
+
+  to {
+    top: 100px;
+  }
+}
+
+@keyframes eye-move {
+  0% {
+    left: 5px;
+    right: -5px;
+  }
+
+  80% {
+    left: 10px;
+    right: -10px;
+  }
+
+  100% {
+    left: 5px;
+    right: -5px;
+  }
+}
+
+@-webkit-keyframes eye-move {
+  0% {
+    left: 5px;
+    right: -5px;
+  }
+
+  80% {
+    left: 10px;
+    right: -10px;
+  }
+
+  100% {
+    left: 5px;
+    right: -5px;
+  }
+}
+
+@keyframes eye-move2 {
+  0% {
+    left: -2px;
+    right: 2px;
+  }
+
+  80% {
+    left: 4px;
+    right: -4px;
+  }
+
+  100% {
+    left: -2px;
+    right: 2px;
+  }
+}
+
+@-webkit-keyframes eye-move2 {
+  0% {
+    left: -2px;
+    right: 2px;
+  }
+
+  80% {
+    left: 4px;
+    right: -4px;
+  }
+
+  100% {
+    left: -2px;
+    right: 2px;
+  }
+}
+
+/* The element to apply the animation to */
+.nervous {
+  -webkit-animation: shake 0.1s linear infinite;
+  -moz-animation: shake 0.1s linear infinite;
+  animation: shake 0.1s linear infinite;
+}
+
+.nervous-drop {
+  position: absolute;
+  left: 6px;
+  top: 19px;
+  -webkit-animation: fall 0.7s linear 0.2s infinite;
+  animation: fall 0.7s linear 0.2s infinite;
+}
+
+.nervous-drop2 {
+  position: absolute;
+  left: 32px;
+  top: 19px;
+  margin-top: 40px;
+  padding-right: 40px;
+  -webkit-animation: fall 0.7s linear infinite;
+  animation: fall 0.7s linear infinite;
+}
+
+.eye-move {
+  position: absolute;
+  top: 8px;
+  left: 5px;
+  right: -5px;
+  -webkit-animation: eye-move 0.7s ease-in infinite;
+  animation: eye-move 0.7s ease-in infinite;
+}
+
+.eye-move2 {
+  position: absolute;
+  left: -2px;
+  right: 2px;
+  top: 10px;
+  -webkit-animation: eye-move2 0.7s ease-in infinite;
+  animation: eye-move2 0.7s ease-in infinite;
+}
+
+// _report
+
+.report .row {
+  padding-top: 15px;
+}
+
+// _popover
+.popover-inner {
+
+  // display: -moz-grid-line;
+  i {
+    width: 100%;
+  }
+}
+
+.sign-btn {
+  margin-top: $margin-medium;
+  width: 100%;
+  height: 45px;
+}
+
+// _custom_fields
+
+.description {
+  color: $gray-dark;
+  font-size: smaller;
+  display: inline-block;
+}
+
+.needs-javascript {
+  display: none;
+}

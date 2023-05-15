@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2022 SAP SE or an SAP affiliate company and CLA-assistant contributors
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*global describe, it, beforeEach, afterEach*/
 
 // unit test
@@ -5,10 +9,10 @@ const assert = require('assert')
 const sinon = require('sinon')
 
 //model
-const Org = require('../../../server/documents/org').Org
+const Org = require('../../../server/src/documents/org').Org
 
 // service under test
-const org = require('../../../server/services/org')
+const org = require('../../../server/src/services/org')
 
 // test data
 const testData = require('../testData').data

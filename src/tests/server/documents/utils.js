@@ -1,4 +1,8 @@
-const utils = require('../../../server/documents/utils');
+// SPDX-FileCopyrightText: 2022 SAP SE or an SAP affiliate company and CLA-assistant contributors
+//
+// SPDX-License-Identifier: Apache-2.0
+
+const utils = require('../../../server/src/documents/utils');
 const assert = require('assert');
 
 describe('documents:utils', () => {

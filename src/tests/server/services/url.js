@@ -1,13 +1,17 @@
-/*global describe, it, beforeEach, afterEach*/
+// SPDX-FileCopyrightText: 2022 SAP SE or an SAP affiliate company and CLA-assistant contributors
+//
+// SPDX-License-Identifier: Apache-2.0
+
+/*global describe, it*/
 
 // unit test
 const assert = require('assert')
 
 // config
-global.config = require('../../../config')
+global.config = require('../../../server/src/config')
 
 // service
-const url = require('../../../server/services/url')
+const url = require('../../../server/src/services/url')
 
 describe('url:baseUrl', () => it('should by default be http://cla-assistant.io', async () => {
     assert.equal(url.baseUrl, 'http://cla-assistant.io')
