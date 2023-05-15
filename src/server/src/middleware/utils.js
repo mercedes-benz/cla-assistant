@@ -4,12 +4,18 @@
 
 const githubService = require('../services/github')
 const log = require('../services/logger')
+const Joi = require('joi')
+const config = require('../config')
 
 class Utils {
     couldBeAdmin(username) {
         return config.server.github.admin_users.length === 0 || config.server.github.admin_users.indexOf(username) >= 0
     }
 
+    adminModeEnabled() {
+        return config.server.github.admin_users.length > 0
+    }
+    
     async checkRepoPushPermissionByName(repo, owner, repoId, token) {
         try {
             let res, repoData
