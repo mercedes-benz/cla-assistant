@@ -27,7 +27,7 @@
         "async": "^3.2.1",
         "body-parser": "^1.19.0",
         "bunyan": "1.8.15",
-        "bunyan-slack": "1.0.0",
+        "bunyan-slack": "0.0.10",
         "cls-rtracer": "^2.6.0",
         "colors": "^1.4.0",
         "connect-mongo": "^4.5.0",
