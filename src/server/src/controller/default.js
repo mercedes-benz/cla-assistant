@@ -23,10 +23,18 @@ router.use('/accept/:owner/:repo', async (req, res) => {
         repo: req.params.repo
     }
 
+    logger.debug(' *****       Checking authentication  ***** ')
+    console.log(' *****       Checking authentication  ***** ') 
+
     if (req.isAuthenticated()) {
         try {
+            logger.debug(' *****       Calling cla.sign()... ***** ')
+            console.log(' *****       Calling cla.sign()... ***** ')
             await cla.sign(req)
+            logger.debug(' *****       ...cla.sign() ***** ')
+            console.log(' *****       ...cla.sign() ***** ')
         } catch (e) {
+            logger.debug(' *****       Found error ***** ')
             if (e && (!e.code || e.code != 200)) {
                 logger.error(e)
 
@@ -34,10 +42,14 @@ router.use('/accept/:owner/:repo', async (req, res) => {
             }
         }
 
+        logger.debug(' *****       redirecting ... ***** ')
+        console.log(' *****       redirecting ... ***** ')
         let redirectUrl = `/${req.args.owner}/${req.args.repo}?redirect=true`
         redirectUrl = req.query.pullRequest ? `${redirectUrl}&pullRequest=${req.query.pullRequest}` : redirectUrl
         res.redirect(redirectUrl)
     } else {
+        logger.debug(' *****       redirecting to auth... ***** ')
+        console.log(' *****       redirecting to auth... ***** ')
         req.session.next = req.originalUrl
         return res.redirect('/auth/github?public=true')
     }
