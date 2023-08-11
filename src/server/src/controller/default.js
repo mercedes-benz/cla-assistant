@@ -89,6 +89,10 @@ router.get('/check/:owner/:repo', (req, res) => {
 router.all('/*', (req, res) => {
     res.setHeader('Last-Modified', (new Date()).toUTCString())
 
+    // aravind
+    console.log("\n\n *** req  ***\n")
+    console.log(req)
+
     if (req.path === '/robots.txt') {
         return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'robots.txt'))
     } else if (req.user) {
