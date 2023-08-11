@@ -41,6 +41,14 @@ function authenticateForAdminOnlyApi(req, res, next) {
 
 // aravind
 module.exports = function (req, res, next) {
+    console.log("\n\n **** req autheticated.js *** \n\n")
+    console.log( "\n\n req-original url \n\n")
+    console.log( req.originalUrl )
+    console.log( "\n\n rr \n\n")
+    console.log(req)
+    console.log("\n\n *** res *** \n\n")
+    console.log( res )
+    
     if (config.server.api_access.free.indexOf(req.originalUrl) > -1) {
         console.log("\n\n **** api_access.free **** ")
         return next()
