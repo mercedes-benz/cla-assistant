@@ -39,12 +39,16 @@ function authenticateForAdminOnlyApi(req, res, next) {
     })(req, res)
 }
 
+// aravind
 module.exports = function (req, res, next) {
     if (config.server.api_access.free.indexOf(req.originalUrl) > -1) {
+        console.log("\n\n **** api_access.free **** ")
         return next()
     } else if (config.server.api_access.admin_only.indexOf(req.originalUrl) > -1) {
+        console.log("\n\n **** is authenticateForAdminOnlyApi **** ")
         return authenticateForAdminOnlyApi(req, res, next)
     } else if (req.isAuthenticated()) {
+        console.log("\n\n **** is Authenticated **** ")
         return next()
     }
     res.status(401).send('Authentication required')
