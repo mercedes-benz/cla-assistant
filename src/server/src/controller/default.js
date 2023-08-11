@@ -94,18 +94,26 @@ router.all('/*', (req, res) => {
     console.log(req)
 
     if (req.path === '/robots.txt') {
+        console.log("\n\n *** robots.txt *** \n\n ")
         return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'robots.txt'))
     } else if (req.user) {
         if (req.path !== '/') {
+            console.log("\n\n *** root / *** \n\n ")
             return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'home.html'))
         }
         if (adminModeEnabled() && couldBeAdmin(req.user.login)) {
+            console.log("\n\n *** adminModeEnabled and cloudBeAdmin / *** \n\n ")
             return routeBasedOnWriteRepoHookPermission(req, res)
         } else if(adminModeEnabled()) {
+            console.log("\n\n *** adminModeEnabled / *** \n\n ")
             return res.redirect(302, '/my-cla')
         }
+
+        console.log("\n\n *** routeBasedOnWriteRepoHookPermission / *** \n\n ")
         return routeBasedOnWriteRepoHookPermission(req, res)
     }
+
+    console.log("\n\n *** config.server.templates.login / *** \n\n ")
     return res.status(200).sendFile(config.server.templates.login)
 })
 
