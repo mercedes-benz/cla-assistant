@@ -536,6 +536,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             // return !$state.current.name.includes('repo');
             return true; // show our TOS everywhere again
         };
+        console.log("\n\n *** home 19 ***\n\n");
     }
 ])
     .directive('feature', ['$window', function () {
