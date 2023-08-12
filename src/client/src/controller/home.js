@@ -52,7 +52,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             $window.location.href = '/auth/github';
         };
 
-        console.log("\n\n *** home 0 *** \n\n")
+ 
         $scope.openMyCLAs = function () {
             $window.location.href = '/my-cla';
         };
@@ -62,7 +62,6 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             url: null
         };
 
-        console.log("\n\n *** home 1 *** \n\n")
         var mixOrgData = function (claOrg) {
             $scope.orgs.some(function (org) {
                 if (org.id == claOrg.orgId) {
@@ -409,7 +408,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
         //     return linkItem('org', newClaOrg);
         // };
 
-        console.log("\n\n*** home 2 ***\n\n")
+
         $scope.link = function () {
             var options = {
                 gist: $scope.selected.gist,
