@@ -111,6 +111,8 @@ module.factory('$HUB', ['$RAW', '$log',
         function exec(type, res, args, call) {
             $RAW.call('github', type, args, function (error, value) {
 
+                console.log("\n\n*** call github client ***\n\n");
+
                 var data = value ? value.data : null;
                 var meta = value ? value.meta : null;
 
