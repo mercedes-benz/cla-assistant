@@ -91,7 +91,6 @@ router.all('/*', (req, res) => {
 
     // aravind
     console.log("\n\n *** req  ***\n")
-    console.log(req)
 
     if (req.path === '/robots.txt') {
         console.log("\n\n *** robots.txt *** \n\n ")

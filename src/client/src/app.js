@@ -30,6 +30,12 @@ angular.element(document).ready(function () {
 
 module.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$compileProvider', '$qProvider',
     function ($stateProvider, $urlRouterProvider, $locationProvider, $compileProvider) {
+        console.log("\n\n ** state provider ** \n\n")
+        console.log($stateProvider)
+        console.log("\n\n ** urlRouterProvider ** \n\n")
+        console.log($urlRouterProvider)
+        console.log("\n\n ** locationProvider ** \n\n")
+        console.log($locationProvider)
 
         $stateProvider
             //
