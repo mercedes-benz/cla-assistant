@@ -315,6 +315,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             return promise;
         };
 
+        console.log("\n\n *** home 13 ***\n\n");
         $scope.count = function () {
             $RAW.get('/count/clas').then(function (res) {
                 $scope.numberClas = res.data.count;
@@ -420,7 +421,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
         //     return linkItem('org', newClaOrg);
         // };
 
-
+        console.log("\n\n *** home 14 ***\n\n");
         $scope.link = function () {
             var options = {
                 gist: $scope.selected.gist,
@@ -459,6 +460,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             return promise;
         };
 
+        console.log("\n\n *** home 15 ***\n\n");
         $scope.remove = function (linkedItem) {
             var api = linkedItem.orgId ? 'org' : 'repo';
             var removeArgs = linkedItem.orgId ? {
@@ -473,10 +475,12 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             });
         };
 
+        console.log("\n\n *** home 16 ***\n\n");
         $scope.isActive = function (viewLocation) {
             return viewLocation === $location.url();
         };
 
+        console.log("\n\n *** home 17 ***\n\n");
         $scope.groupDefaultCla = function (gist) {
             var found = false;
 
@@ -495,6 +499,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             return item.full_name ? 'Repositories' : 'Organisations';
         };
 
+        console.log("\n\n *** home 18 ***\n\n");
         var handleNullCla = function (item) {
             var clearDropdown = function (item) {
                 if (item && $scope.isRepo(item)) {

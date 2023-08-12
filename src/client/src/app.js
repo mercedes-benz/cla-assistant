@@ -48,6 +48,15 @@ module.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$co
             })
 
             //
+            // Repo cla
+            //
+            .state('repo.cla', {
+                url: '',
+                templateUrl: '/assets/templates/cla.html',
+                controller: 'ClaController'
+            })
+
+            //
             // Settings view
             //
             .state('home.settings', {
@@ -88,14 +97,7 @@ module.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$co
                 template: '<section ui-view></section>'
             })
 
-            //
-            // Repo cla
-            //
-            .state('repo.cla', {
-                url: '',
-                templateUrl: '/assets/templates/cla.html',
-                controller: 'ClaController'
-            })
+
 
             //
             // 404 Error
