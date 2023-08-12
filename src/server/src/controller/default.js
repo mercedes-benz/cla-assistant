@@ -23,18 +23,18 @@ router.use('/accept/:owner/:repo', async (req, res) => {
         repo: req.params.repo
     }
 
-    logger.debug(' *****       Checking authentication  ***** ')
-    console.log(' *****       Checking authentication  ***** ') 
+
+    console.log("\n\n *****       Checking authentication  ***** \n\n") 
 
     if (req.isAuthenticated()) {
         try {
-            logger.debug(' *****       Calling cla.sign()... ***** ')
-            console.log(' *****       Calling cla.sign()... ***** ')
+
+            console.log("\n\n *****       Calling cla.sign()... ***** \n\n")
             await cla.sign(req)
-            logger.debug(' *****       ...cla.sign() ***** ')
-            console.log(' *****       ...cla.sign() ***** ')
+
+            console.log("\n\n *****       ...cla.sign() ***** \n\n")
         } catch (e) {
-            logger.debug(' *****       Found error ***** ')
+            logger.debug("\n\n *****       Found error ***** \n\n")
             if (e && (!e.code || e.code != 200)) {
                 logger.error(e)
 
@@ -42,14 +42,14 @@ router.use('/accept/:owner/:repo', async (req, res) => {
             }
         }
 
-        logger.debug(' *****       redirecting ... ***** ')
-        console.log(' *****       redirecting ... ***** ')
+
+        console.log("\n\n *****       redirecting ... ***** \n\n")
         let redirectUrl = `/${req.args.owner}/${req.args.repo}?redirect=true`
         redirectUrl = req.query.pullRequest ? `${redirectUrl}&pullRequest=${req.query.pullRequest}` : redirectUrl
         res.redirect(redirectUrl)
     } else {
-        logger.debug(' *****       redirecting to auth... ***** ')
-        console.log(' *****       redirecting to auth... ***** ')
+
+        console.log("\n\n *****       redirecting to auth... ***** \n\n")
         req.session.next = req.originalUrl
         return res.redirect('/auth/github?public=true')
     }
@@ -118,8 +118,10 @@ router.all('/*', (req, res) => {
 
 function routeBasedOnWriteRepoHookPermission(req, res) {
     if(req.user.scope && req.user.scope.indexOf('write:repo_hook') > -1) {
+        console.log("\n\n routeBasedOnWriteRepoHookPermission \n\n")
         return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'home.html'))
     }
+    console.log("\n\n routeBasedOnWriteRepoHookPermission ->my-cla \n\n")
     return res.redirect(302, '/my-cla')
 }
 
