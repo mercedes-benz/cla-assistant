@@ -540,6 +540,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
     }
 ])
     .directive('feature', ['$window', function () {
+        console.log( "\n\n *** feature ***\n\n" );
         return {
             templateUrl: '/assets/templates/feature.html',
             scope: {
@@ -551,6 +552,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
         };
     }])
     .directive('textSlider', ['$window', '$timeout', function ($window, $timeout) {
+        console.log("\n\n *** textSlider ***\n\n");
         return {
             scope: {
                 time: '@',
