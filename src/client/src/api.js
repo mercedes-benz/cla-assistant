@@ -152,6 +152,7 @@ module.factory('$HUB', ['$RAW', '$log',
                 }
             });
 
+            console.log( res );
             return res;
         }
 
