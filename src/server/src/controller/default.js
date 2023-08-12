@@ -94,10 +94,12 @@ router.all('/*', (req, res) => {
 
     if (req.path === '/robots.txt') {
         console.log("\n\n *** robots.txt *** \n\n ")
+        console.log(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'robots.txt'))
         return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'robots.txt'))
     } else if (req.user) {
         if (req.path !== '/') {
             console.log("\n\n *** root / *** \n\n ")
+            console.log( path.join(__dirname, '..', '..', '..', 'client', 'assets', 'home.html') )
             return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'home.html'))
         }
         if (adminModeEnabled() && couldBeAdmin(req.user.login)) {
