@@ -48,15 +48,17 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
         $scope.isLoading = false;
         $scope.showActivity = $location.host().indexOf('cla-assistant.io') > -1;
 
+        console.log("\n\n *** home 0 ***\n\n");
         $scope.logAdminIn = function () {
             $window.location.href = '/auth/github';
         };
 
- 
+        console.log("\n\n *** home 1 ***\n\n");
         $scope.openMyCLAs = function () {
             $window.location.href = '/my-cla';
         };
 
+        console.log("\n\n *** home 2 ***\n\n");
         var nullCla = {
             name: 'No CLA',
             url: null
