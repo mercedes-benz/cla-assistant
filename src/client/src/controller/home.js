@@ -30,7 +30,7 @@ var deleteFromArray = function (item, array) {
 
 module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$HUBService', '$window', '$modal', '$timeout', '$q', '$location', '$state', 'utils', 'linkItemService',
     function ($rootScope, $scope, $RPCService, $RAW, $HUBService, $window, $modal, $timeout, $q, $location, $state, utils, linkItemService) {
-
+        console.log("\n\n **** home.js *** \n\n")
         $scope.active = 0;
         $scope.claRepos = [];
         $scope.claOrgs = [];

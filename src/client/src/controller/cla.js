@@ -10,7 +10,8 @@
 
 module.controller('ClaController', ['$rootScope', '$log', '$window', '$scope', '$stateParams', '$RPCService', '$HUBService', '$sce', '$timeout', '$http', '$q', 'utils',
     function ($rootScope, $log, $window, $scope, $stateParams, $RPCService, $HUBService, $sce, $timeout, $http, $q, utils) {
-
+        console.log("\n\n *** CLA CONTROLLER ** \n\n")
+        
         $scope.cla = null;
         $scope.customFields = {};
         $scope.customValues = {};

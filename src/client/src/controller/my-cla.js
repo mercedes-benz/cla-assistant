@@ -11,6 +11,7 @@
 
 module.controller('MyClaCtrl', ['$scope', '$filter', '$HUB', '$RAW', '$RPCService', '$HUBService', '$modal', 'utils',
     function ($scope, $filter, $HUB, $RAW, $RPCService, $HUBService, $modal, utils) {
+        console.log("\n\n *** my-cla *** \n\n")
         $scope.repos = [];
         $scope.gists = [];
         $scope.signedCLAs = [];
