@@ -145,6 +145,7 @@ module.factory('$HUB', ['$RAW', '$log',
                 }
 
                 $log.debug('$HUB', args, res, res.error);
+                console.log('$HUB', args, res, res.error);
 
                 if (typeof call === 'function') {
                     call(res.error, res);
