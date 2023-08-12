@@ -64,6 +64,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             url: null
         };
 
+        console.log("\n\n *** home 3 ***\n\n");
         var mixOrgData = function (claOrg) {
             $scope.orgs.some(function (org) {
                 if (org.id == claOrg.orgId) {
@@ -74,6 +75,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             });
         };
 
+        console.log("\n\n *** home 4 ***\n\n");
         var getLinkedOrgs = function () {
             $scope.claOrgs = [];
 
@@ -87,6 +89,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             });
         };
 
+        console.log("\n\n *** home 5 ***\n\n");
         var mixRepoData = function (claRepo) {
             $scope.repos.some(function (repo) {
                 if (claRepo.repo === repo.name && claRepo.owner === repo.owner.login) {
@@ -99,6 +102,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             return claRepo;
         };
 
+        console.log("\n\n *** home 6 ***\n\n");
         var getLinkedRepos = function () {
             var repoSet = [];
             $scope.repos.forEach(function (repo) {
@@ -121,6 +125,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             });
         };
 
+        console.log("\n\n *** home 7 ***\n\n");
         var getUser = function () {
             $rootScope.user = {
                 value: {
@@ -141,6 +146,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             });
         };
 
+        console.log("\n\n *** home 8 ***\n\n");
         var getRepos = function () {
             if ($scope.user && $scope.user.value && $scope.user.value.admin) {
                 return $HUBService.call('repos', 'listForAuthenticatedUser', {
@@ -159,6 +165,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             }
         };
 
+        console.log("\n\n *** home 9 ***\n\n");
         var getGists = function () {
             $scope.gists = [];
             if (!$scope.defaultClas.length) {
@@ -180,6 +187,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             });
         };
 
+        console.log("\n\n *** home 10 ***\n\n");
         var getOrgs = function () {
             var deferred = $q.defer();
             if (!$scope.user.value.org_admin) {
@@ -198,6 +206,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             });
         };
 
+        console.log("\n\n *** home 11 ***\n\n");
         var showErrorMessage = function (text) {
             var error = text;
             $timeout(function () {
@@ -207,6 +216,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             $scope.errorMsg.push(error);
         };
 
+        console.log("\n\n *** home 12 ***\n\n");
         var linkSuccess = function () {
             var modal = $modal.open({
                 templateUrl: '/assets/templates/modals/linkSuccess.html',
