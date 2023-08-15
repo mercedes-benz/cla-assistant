@@ -33,6 +33,10 @@ module.factory('$RAW', ['$q', '$http',
             call: function (m, functn, data, callback) {
                 var now = new Date();
 
+                console.log("\n\n ----- \n\n");
+                console.log('/api/' + m + '/' + functn);
+                console.log("\n\n ----- \n\n");
+                
                 return $http.post('/api/' + m + '/' + functn, data).then(
                     function successCallback(res) {
                         // parse result (again)
