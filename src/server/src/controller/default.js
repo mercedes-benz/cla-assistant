@@ -56,9 +56,11 @@ router.use('/accept/:owner/:repo', async (req, res) => {
 })
 
 router.use('/signin/:owner/:repo', (req, res) => {
+    console.log("\n\n *** signin owner repo *** \n\n")
     let redirectUrl = `/${req.params.owner}/${req.params.repo}`
     req.session.next = req.query.pullRequest ? `${redirectUrl}?pullRequest=${req.query.pullRequest}` : redirectUrl
-
+    console.log(req.session.next)
+    console.log("\n\n ***** \n\n")
     return res.redirect('/auth/github?public=true')
 })
 
