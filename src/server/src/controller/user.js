@@ -55,9 +55,6 @@ router.get('/auth/github/callback',
             return res.redirect('/auth/github?admin=true')
         }
 
-        console.log("\n\n *** auth/github/callback - session *** \n\n")
-        console.log( req.session )
-        console.log( "\n\n ---- sessions ---- \n\n")
         res.redirect(req.session.returnTo || req.headers.referer || '/')
         req.session.next = null
         logger.debug('Finish processing authentication callback after passport authenticate')

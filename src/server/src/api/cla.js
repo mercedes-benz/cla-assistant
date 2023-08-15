@@ -86,7 +86,7 @@ class ClaApi {
 
             console.log("\n\n ---- gist content ---\n\n");
             console.log(gistContent);
-            
+
             return gistContent
         } catch (error) {
             logger.error(new Error(error).stack, 'with args: ', removeToken(req.args))
@@ -453,6 +453,7 @@ class ClaApi {
 }
 const claApi = new ClaApi()
 module.exports = claApi
+
 
 
 async function markdownRender(content, token, owner) {
