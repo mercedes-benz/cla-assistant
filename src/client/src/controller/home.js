@@ -328,6 +328,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             });
         };
 
+        console.log("\n\n *** home 13 - 1 ***\n\n");
         getUser().then(function () {
             $scope.isLoading = true;
             $q.all([
@@ -346,6 +347,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             }
         });
 
+        console.log("\n\n *** home 13 - 2 ***\n\n");
         $scope.clear = function ($event, obj) {
             $event.stopPropagation();
             if (obj === 'repo') {
@@ -355,6 +357,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             }
         };
 
+        console.log("\n\n *** home 13 - 3 ***\n\n");
         $scope.isValid = function (gist) {
             var valid = false;
             // valid = value ? !!value.match(/https:\/\/gist\.github\.com\/([a-zA-Z0-9_-]*)\/[a-zA-Z0-9]*$/) : false;
@@ -363,10 +366,12 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             return valid;
         };
 
+        console.log("\n\n *** home 13 - 4 ***\n\n");
         $scope.isRepo = function (item) {
             return item && (item.full_name || item.repoId) ? true : false;
         };
 
+        console.log("\n\n *** home 13 -5 ***\n\n");
         $scope.linkCla = function () {
             confirmAdd();
         };
