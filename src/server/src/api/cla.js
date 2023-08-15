@@ -81,6 +81,7 @@ class ClaApi {
 
         try {
             let renderToken = token ? token : req.user && req.user.token ? req.user.token : token
+            console.log( gist.files );
             let gistContent = await renderFiles(gist.files, renderToken, req.user ? req.user.login : req.args.owner)
             gistContent.updatedAt = gist.updated_at
 

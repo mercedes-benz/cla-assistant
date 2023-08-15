@@ -60,7 +60,7 @@ module.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$co
             // Settings view
             //
             .state('home.settings', {
-                url: '/detail/:user/:repo',
+                // url: '/detail/:user/:repo',
                 templateUrl: '/assets/templates/settings.html',
                 controller: 'SettingsCtrl',
                 params: {
