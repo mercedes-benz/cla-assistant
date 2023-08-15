@@ -584,8 +584,10 @@ class ClaService {
 
     async check(args, item) {
         if (args.user) {
+            console.log("\n\n check userSignature... \n\n");
             return this.checkUserSignature(args, item)
         } else if (args.number) {
+            console.log("\n\n check pullRequSignatures ... \n\n");
             return this.checkPullRequestSignatures(args, item)
         }
         throw new Error('A user or a pull request number is required.')
