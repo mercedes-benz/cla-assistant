@@ -74,11 +74,23 @@ router.get('/check/:owner/:repo', (req, res) => {
 router.all('/*', (req, res) => {
     let filePath
     if (req.path === '/robots.txt') {
+        console.log("\n\n");
+        console.log("*** /robots ***\n");
+        console.log( req );
+        console.log("\n\n");
         filePath = path.join(__dirname, '..', '..', '..', 'client', 'assets', 'robots.txt')
     }
     else if ((req.user && req.user.scope && req.user.scope.indexOf('write:repo_hook') > -1) || req.path !== '/') {
+        console.log("\n\n");
+        console.log("*** /2nd ***\n");
+        console.log( req );
+        console.log("\n\n");
         filePath = path.join(__dirname, '..', '..', '..', 'client', 'assets', 'home.html')
     } else {
+        console.log("\n\n");
+        console.log("*** /login ***\n");
+        console.log( req );
+        console.log("\n\n");
         filePath = config.server.templates.login
     }
     res.setHeader('Last-Modified', (new Date()).toUTCString())
