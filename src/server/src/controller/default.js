@@ -95,7 +95,7 @@ router.all('/*', (req, res) => {
         }
         if (adminModeEnabled() && couldBeAdmin(req.user.login)) {
             if(req.user.scope && req.user.scope.indexOf('write:repo_hook') > -1) {
-                return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'home.html'))
+                return res.status(200).sendFile(config.server.templates.login)
             }
         } else if(adminModeEnabled()) {
             return res.redirect(302, '/my-cla')
