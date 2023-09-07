@@ -87,23 +87,25 @@ router.get('/check/:owner/:repo', (req, res) => {
     res.redirect(back)
 })
 router.all('/*', (req, res) => {
-    res.setHeader('Last-Modified', (new Date()).toUTCString())
-    let filePath
-    // aravind
-    console.log("\n\n *** req  ***\n")
     if (req.path === '/robots.txt') {
-        filePath = path.join(__dirname, '..', '..', '..', 'client', 'assets', 'robots.txt')
+        return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'robots.txt'))
     } else if (req.user) {
         if (req.path !== '/') {
-            filePath = path.join(__dirname, '..', '..', '..', 'client', 'assets', 'home.html')
+            return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'home.html'))
         }
         if (adminModeEnabled() && couldBeAdmin(req.user.login)) {
-            filePath = config.server.templates.login
+            if(req.user.scope && req.user.scope.indexOf('write:repo_hook') > -1) {
+                return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'home.html'))
+            }
         } else if(adminModeEnabled()) {
             return res.redirect(302, '/my-cla')
+        } else {
+            return res.status(200).sendFile(config.server.templates.login)
         }
     }
-    res.status(200).sendFile(filePath)
+    res.setHeader('Last-Modified', (new Date()).toUTCString())
+    return res.status(200).sendFile(config.server.templates.login)
+
 })
 
 module.exports = router
