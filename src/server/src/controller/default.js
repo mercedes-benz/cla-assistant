@@ -91,7 +91,7 @@ router.all('/*', (req, res) => {
         return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'robots.txt'))
     } else if (req.user) {
         if (req.path !== '/') {
-            return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'home.html'))
+            return res.status(200).sendFile(config.server.templates.login)
         }
         if (adminModeEnabled() && couldBeAdmin(req.user.login)) {
             if(req.user.scope && req.user.scope.indexOf('write:repo_hook') > -1) {
