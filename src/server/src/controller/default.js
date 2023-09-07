@@ -86,19 +86,23 @@ router.get('/check/:owner/:repo', (req, res) => {
     })
     res.redirect(back)
 })
-
-
 router.all('/*', (req, res) => {
-    let filePath
-    if (req.path === '/robots.txt') {
-        filePath = path.join(__dirname, '..', '..', '..', 'client', 'assets', 'robots.txt')
-    }
-    else if ((req.user && req.user.scope && req.user.scope.indexOf('write:repo_hook') > -1) || req.path !== '/') {
-        filePath = path.join(__dirname, '..', '..', '..', 'client', 'assets', 'home.html')
-    } else {
-        filePath = config.server.templates.login
-    }
     res.setHeader('Last-Modified', (new Date()).toUTCString())
+    let filePath
+    // aravind
+    console.log("\n\n *** req  ***\n")
+    if (req.path === '/robots.txt') {
+        filePath = path.join(__dirname, '..', '..', '..', 'client', 'assets', 'robots.txt'))
+    } else if (req.user) {
+        if (req.path !== '/') {
+            filePath = path.join(__dirname, '..', '..', '..', 'client', 'assets', 'home.html'))
+        }
+        if (adminModeEnabled() && couldBeAdmin(req.user.login)) {
+            filePath = config.server.templates.login
+        } else if(adminModeEnabled()) {
+            return res.redirect(302, '/my-cla')
+        }
+    }
     res.status(200).sendFile(filePath)
 })
 
