@@ -91,13 +91,9 @@ router.all('/*', (req, res) => {
     if (req.path === '/robots.txt') {
         filePath = path.join(__dirname, '..', '..', '..', 'client', 'assets', 'robots.txt')
     }
-    else if (((req.user && req.user.scope && req.user.scope.indexOf('write:repo_hook') > -1) || req.path !== '/') && adminModeEnabled()) {
-        filePath = path.join(__dirname, '..', '..', '..', 'client', 'assets', 'templates', 'my-cla.html')
-    }
     else if ((req.user && req.user.scope && req.user.scope.indexOf('write:repo_hook') > -1) || req.path !== '/') {
         filePath = path.join(__dirname, '..', '..', '..', 'client', 'assets', 'home.html')
-    }
-    else {
+    } else {
         filePath = config.server.templates.login
     }
     res.setHeader('Last-Modified', (new Date()).toUTCString())
