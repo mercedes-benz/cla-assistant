@@ -92,10 +92,10 @@ router.all('/*', (req, res) => {
     // aravind
     console.log("\n\n *** req  ***\n")
     if (req.path === '/robots.txt') {
-        filePath = path.join(__dirname, '..', '..', '..', 'client', 'assets', 'robots.txt'))
+        filePath = path.join(__dirname, '..', '..', '..', 'client', 'assets', 'robots.txt')
     } else if (req.user) {
         if (req.path !== '/') {
-            filePath = path.join(__dirname, '..', '..', '..', 'client', 'assets', 'home.html'))
+            filePath = path.join(__dirname, '..', '..', '..', 'client', 'assets', 'home.html')
         }
         if (adminModeEnabled() && couldBeAdmin(req.user.login)) {
             filePath = config.server.templates.login
