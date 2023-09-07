@@ -8,6 +8,7 @@
 // tmpl: home.html
 // path: /
 // *****************************************************
+const { couldBeAdmin, adminModeEnabled } = require('../middleware/utils')
 
 var isInArray = function (item, items) {
     function check(linkedItem) {
@@ -50,7 +51,13 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
 
         console.log("\n\n *** home 0 ***\n\n");
         $scope.logAdminIn = function () {
+            if(adminModeEnabled()) {
             $window.location.href = '/auth/github';
+            }
+
+            else {
+                $window.location.href = '/my-cla';
+                 }
         };
 
         console.log("\n\n *** home 1 ***\n\n");
