@@ -111,7 +111,14 @@ router.all('/*', (req, res) => {
         return routeBasedOnWriteRepoHookPermission(req, res)
     }
     else {
-        return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'home.html'))
+        if (req.path !== '/') {
+            console.log("\n\n *** root / *** \n\n ")
+            console.log( path.join(__dirname, '..', '..', '..', 'client', 'assets', 'home.html') )
+            return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'home.html'))
+        }
+        else {
+            return res.status(200).sendFile(config.server.templates.login)
+        }
     }
     console.log("\n\n *** config.server.templates.login / *** \n\n ")
     return res.status(200).sendFile(config.server.templates.login)
