@@ -88,17 +88,42 @@ router.get('/check/:owner/:repo', (req, res) => {
 })
 
 router.all('/*', (req, res) => {
-    let filePath
-    if (req.path === '/robots.txt') {
-        filePath = path.join(__dirname, '..', '..', '..', 'client', 'assets', 'robots.txt')
-    }
-    else if ((req.user && req.user.scope && req.user.scope.indexOf('write:repo_hook') > -1) || req.path !== '/') {
-        filePath = path.join(__dirname, '..', '..', '..', 'client', 'assets', 'templates', 'home.html')
-    } else {
-        filePath = config.server.templates.login
-    }
     res.setHeader('Last-Modified', (new Date()).toUTCString())
-    res.status(200).sendFile(filePath)
+    console.log("\n\n *** req  ***\n")
+    if (req.path === '/robots.txt') {
+        console.log("\n\n *** robots.txt *** \n\n ")
+        console.log(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'robots.txt'))
+        return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'robots.txt'))
+    } else if (req.user) {
+        if (req.path !== '/') {
+            console.log("\n\n *** root / *** \n\n ")
+            console.log( path.join(__dirname, '..', '..', '..', 'client', 'assets', 'home.html') )
+            return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'home.html'))
+        }
+        if (adminModeEnabled() && couldBeAdmin(req.user.login)) {
+            console.log("\n\n *** adminModeEnabled and cloudBeAdmin / *** \n\n ")
+            return routeBasedOnWriteRepoHookPermission(req, res)
+        } else if(adminModeEnabled()) {
+            console.log("\n\n *** adminModeEnabled / *** \n\n ")
+            return res.redirect(302, '/my-cla')
+        }
+        console.log("\n\n *** routeBasedOnWriteRepoHookPermission / *** \n\n ")
+        return routeBasedOnWriteRepoHookPermission(req, res)
+    }
+    else {
+        return res.status(200).sendFile(config.server.templates.login)
+    }
+    console.log("\n\n *** config.server.templates.login / *** \n\n ")
+    return res.status(200).sendFile(config.server.templates.login)
 })
+
+function routeBasedOnWriteRepoHookPermission(req, res) {
+    if(req.user.scope && req.user.scope.indexOf('write:repo_hook') > -1) {
+        console.log("\n\n routeBasedOnWriteRepoHookPermission \n\n")
+        return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'templates', 'home.html'))
+    }
+    console.log("\n\n routeBasedOnWriteRepoHookPermission ->my-cla \n\n")
+    return res.redirect(302, '/my-cla')
+}
 
 module.exports = router
