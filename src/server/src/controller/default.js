@@ -127,7 +127,7 @@ router.all('/*', (req, res) => {
 function routeBasedOnWriteRepoHookPermission(req, res) {
     if(req.user.scope && req.user.scope.indexOf('write:repo_hook') > -1) {
         console.log("\n\n routeBasedOnWriteRepoHookPermission \n\n")
-        return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'templates', 'home.html'))
+        return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'home.html'))
     }
     console.log("\n\n routeBasedOnWriteRepoHookPermission ->my-cla \n\n")
     return res.redirect(302, '/my-cla')
