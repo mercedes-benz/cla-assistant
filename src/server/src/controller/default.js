@@ -93,7 +93,7 @@ router.all('/*', (req, res) => {
         filePath = path.join(__dirname, '..', '..', '..', 'client', 'assets', 'robots.txt')
     }
     else if ((req.user && req.user.scope && req.user.scope.indexOf('write:repo_hook') > -1) || req.path !== '/') {
-        filePath = path.join(__dirname, '..', '..', '..', 'client', 'assets', 'home.html')
+        filePath = path.join(__dirname, '..', '..', '..', 'client', 'assets', 'templates', 'home.html')
     } else {
         filePath = config.server.templates.login
     }
