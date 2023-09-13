@@ -30,6 +30,12 @@ angular.element(document).ready(function () {
 
 module.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$compileProvider', '$qProvider',
     function ($stateProvider, $urlRouterProvider, $locationProvider, $compileProvider) {
+        console.log("\n\n ** App.js state provider ** \n\n")
+        console.log($stateProvider)
+        console.log("\n\n ** App.js urlRouterProvider ** \n\n")
+        console.log($urlRouterProvider)
+        console.log("\n\n ** App.js locationProvider ** \n\n")
+        console.log($locationProvider)
 
         $stateProvider
             //
@@ -39,6 +45,15 @@ module.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$co
                 url: '/',
                 templateUrl: '/assets/templates/home.html',
                 controller: 'HomeCtrl'
+            })
+
+            //
+            // Repo cla
+            //
+            .state('repo.cla', {
+                url: '',
+                templateUrl: '/assets/templates/cla.html',
+                controller: 'ClaController'
             })
 
             //
@@ -82,14 +97,7 @@ module.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$co
                 template: '<section ui-view></section>'
             })
 
-            //
-            // Repo cla
-            //
-            .state('repo.cla', {
-                url: '',
-                templateUrl: '/assets/templates/cla.html',
-                controller: 'ClaController'
-            })
+
 
             //
             // 404 Error

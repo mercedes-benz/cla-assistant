@@ -33,6 +33,10 @@ module.factory('$RAW', ['$q', '$http',
             call: function (m, functn, data, callback) {
                 var now = new Date();
 
+                console.log("\n\n ----- \n\n");
+                console.log('/api/' + m + '/' + functn);
+                console.log("\n\n ----- \n\n");
+                
                 return $http.post('/api/' + m + '/' + functn, data).then(
                     function successCallback(res) {
                         // parse result (again)
@@ -111,6 +115,12 @@ module.factory('$HUB', ['$RAW', '$log',
         function exec(type, res, args, call) {
             $RAW.call('github', type, args, function (error, value) {
 
+                console.log("\n\n*** call github client ***\n\n");
+                console.log(type);
+                console.log(res);
+                console.log(args);
+                console.log(call);
+
                 var data = value ? value.data : null;
                 var meta = value ? value.meta : null;
 
@@ -143,12 +153,14 @@ module.factory('$HUB', ['$RAW', '$log',
                 }
 
                 $log.debug('$HUB', args, res, res.error);
+                console.log('$HUB', args, res, res.error);
 
                 if (typeof call === 'function') {
                     call(res.error, res);
                 }
             });
 
+            console.log( res );
             return res;
         }
 

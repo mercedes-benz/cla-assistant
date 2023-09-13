@@ -23,10 +23,18 @@ router.use('/accept/:owner/:repo', async (req, res) => {
         repo: req.params.repo
     }
 
+
+    console.log("\n\n *****       Checking authentication  ***** \n\n") 
+
     if (req.isAuthenticated()) {
         try {
+
+            console.log("\n\n *****       Calling cla.sign()... ***** \n\n")
             await cla.sign(req)
+
+            console.log("\n\n *****       ...cla.sign() ***** \n\n")
         } catch (e) {
+            logger.debug("\n\n *****       Found error ***** \n\n")
             if (e && (!e.code || e.code != 200)) {
                 logger.error(e)
 
@@ -34,19 +42,25 @@ router.use('/accept/:owner/:repo', async (req, res) => {
             }
         }
 
+
+        console.log("\n\n *****       redirecting ... ***** \n\n")
         let redirectUrl = `/${req.args.owner}/${req.args.repo}?redirect=true`
         redirectUrl = req.query.pullRequest ? `${redirectUrl}&pullRequest=${req.query.pullRequest}` : redirectUrl
         res.redirect(redirectUrl)
     } else {
+
+        console.log("\n\n *****       redirecting to auth... ***** \n\n")
         req.session.next = req.originalUrl
         return res.redirect('/auth/github?public=true')
     }
 })
 
 router.use('/signin/:owner/:repo', (req, res) => {
+    console.log("\n\n *** signin owner repo *** \n\n")
     let redirectUrl = `/${req.params.owner}/${req.params.repo}`
     req.session.next = req.query.pullRequest ? `${redirectUrl}?pullRequest=${req.query.pullRequest}` : redirectUrl
-
+    console.log(req.session.next)
+    console.log("\n\n ***** \n\n")
     return res.redirect('/auth/github?public=true')
 })
 
@@ -73,10 +87,8 @@ router.get('/check/:owner/:repo', (req, res) => {
     res.redirect(back)
 })
 
-
 router.all('/*', (req, res) => {
     res.setHeader('Last-Modified', (new Date()).toUTCString())
-
     if (req.path === '/robots.txt') {
         return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'robots.txt'))
     } else if (req.user) {
@@ -90,9 +102,16 @@ router.all('/*', (req, res) => {
         }
         return routeBasedOnWriteRepoHookPermission(req, res)
     }
+    else {
+        if (req.path !== '/') {
+            return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'home.html'))
+        }
+        else {
+            return res.status(200).sendFile(config.server.templates.login)
+        }
+    }
     return res.status(200).sendFile(config.server.templates.login)
 })
-
 function routeBasedOnWriteRepoHookPermission(req, res) {
     if(req.user.scope && req.user.scope.indexOf('write:repo_hook') > -1) {
         return res.status(200).sendFile(path.join(__dirname, '..', '..', '..', 'client', 'assets', 'home.html'))

@@ -81,8 +81,13 @@ class ClaApi {
 
         try {
             let renderToken = token ? token : req.user && req.user.token ? req.user.token : token
+            console.log( gist.files );
             let gistContent = await renderFiles(gist.files, renderToken, req.user ? req.user.login : req.args.owner)
             gistContent.updatedAt = gist.updated_at
+
+            console.log("\n\n ---- gist content ---\n\n");
+            console.log(gistContent);
+
             return gistContent
         } catch (error) {
             logger.error(new Error(error).stack, 'with args: ', removeToken(req.args))
@@ -449,6 +454,7 @@ class ClaApi {
 }
 const claApi = new ClaApi()
 module.exports = claApi
+
 
 
 async function markdownRender(content, token, owner) {

@@ -11,7 +11,8 @@
 
 module.controller('SettingsCtrl', ['$rootScope', '$scope', '$stateParams', '$RPC', '$RPCService', '$window', '$sce', '$modal', '$q', 'utils', '$log',
     function ($rootScope, $scope, $stateParams, $RPC, $RPCService, $window, $sce, $modal, $q, utils, $log) {
-
+        console.log("\n\n *** settings *** \n\n")
+        
         $scope.gist = {};
         $scope.gistIndex = 0;
         $scope.admin = false;

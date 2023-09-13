@@ -9,6 +9,7 @@
 // path: /
 // *****************************************************
 
+
 var isInArray = function (item, items) {
     function check(linkedItem) {
         if (!item.full_name) {
@@ -30,7 +31,7 @@ var deleteFromArray = function (item, array) {
 
 module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$HUBService', '$window', '$modal', '$timeout', '$q', '$location', '$state', 'utils', 'linkItemService',
     function ($rootScope, $scope, $RPCService, $RAW, $HUBService, $window, $modal, $timeout, $q, $location, $state, utils, linkItemService) {
-
+        console.log("\n\n **** home.js *** \n\n")
         $scope.active = 0;
         $scope.claRepos = [];
         $scope.claOrgs = [];
@@ -48,19 +49,23 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
         $scope.isLoading = false;
         $scope.showActivity = $location.host().indexOf('cla-assistant.io') > -1;
 
+        console.log("\n\n *** home 0 ***\n\n");
         $scope.logAdminIn = function () {
-            $window.location.href = '/auth/github';
+            $window.location.href = '/auth/github';  
         };
 
+        console.log("\n\n *** home 1 ***\n\n");
         $scope.openMyCLAs = function () {
             $window.location.href = '/my-cla';
         };
 
+        console.log("\n\n *** home 2 ***\n\n");
         var nullCla = {
             name: 'No CLA',
             url: null
         };
 
+        console.log("\n\n *** home 3 ***\n\n");
         var mixOrgData = function (claOrg) {
             $scope.orgs.some(function (org) {
                 if (org.id == claOrg.orgId) {
@@ -71,6 +76,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             });
         };
 
+        console.log("\n\n *** home 4 ***\n\n");
         var getLinkedOrgs = function () {
             $scope.claOrgs = [];
 
@@ -84,6 +90,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             });
         };
 
+        console.log("\n\n *** home 5 ***\n\n");
         var mixRepoData = function (claRepo) {
             $scope.repos.some(function (repo) {
                 if (claRepo.repo === repo.name && claRepo.owner === repo.owner.login) {
@@ -96,6 +103,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             return claRepo;
         };
 
+        console.log("\n\n *** home 6 ***\n\n");
         var getLinkedRepos = function () {
             var repoSet = [];
             $scope.repos.forEach(function (repo) {
@@ -118,6 +126,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             });
         };
 
+        console.log("\n\n *** home 7 ***\n\n");
         var getUser = function () {
             $rootScope.user = {
                 value: {
@@ -138,6 +147,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             });
         };
 
+        console.log("\n\n *** home 8 ***\n\n");
         var getRepos = function () {
             if ($scope.user && $scope.user.value && $scope.user.value.admin) {
                 return $HUBService.call('repos', 'listForAuthenticatedUser', {
@@ -156,6 +166,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             }
         };
 
+        console.log("\n\n *** home 9 ***\n\n");
         var getGists = function () {
             $scope.gists = [];
             if (!$scope.defaultClas.length) {
@@ -177,6 +188,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             });
         };
 
+        console.log("\n\n *** home 10 ***\n\n");
         var getOrgs = function () {
             var deferred = $q.defer();
             if (!$scope.user.value.org_admin) {
@@ -195,6 +207,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             });
         };
 
+        console.log("\n\n *** home 11 ***\n\n");
         var showErrorMessage = function (text) {
             var error = text;
             $timeout(function () {
@@ -204,6 +217,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             $scope.errorMsg.push(error);
         };
 
+        console.log("\n\n *** home 12 ***\n\n");
         var linkSuccess = function () {
             var modal = $modal.open({
                 templateUrl: '/assets/templates/modals/linkSuccess.html',
@@ -302,6 +316,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             return promise;
         };
 
+        console.log("\n\n *** home 13 ***\n\n");
         $scope.count = function () {
             $RAW.get('/count/clas').then(function (res) {
                 $scope.numberClas = res.data.count;
@@ -314,6 +329,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             });
         };
 
+        console.log("\n\n *** home 13 - 1 ***\n\n");
         getUser().then(function () {
             $scope.isLoading = true;
             $q.all([
@@ -332,6 +348,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             }
         });
 
+        console.log("\n\n *** home 13 - 2 ***\n\n");
         $scope.clear = function ($event, obj) {
             $event.stopPropagation();
             if (obj === 'repo') {
@@ -341,6 +358,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             }
         };
 
+        console.log("\n\n *** home 13 - 3 ***\n\n");
         $scope.isValid = function (gist) {
             var valid = false;
             // valid = value ? !!value.match(/https:\/\/gist\.github\.com\/([a-zA-Z0-9_-]*)\/[a-zA-Z0-9]*$/) : false;
@@ -349,10 +367,12 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             return valid;
         };
 
+        console.log("\n\n *** home 13 - 4 ***\n\n");
         $scope.isRepo = function (item) {
             return item && (item.full_name || item.repoId) ? true : false;
         };
 
+        console.log("\n\n *** home 13 -5 ***\n\n");
         $scope.linkCla = function () {
             confirmAdd();
         };
@@ -407,6 +427,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
         //     return linkItem('org', newClaOrg);
         // };
 
+        console.log("\n\n *** home 14 ***\n\n");
         $scope.link = function () {
             var options = {
                 gist: $scope.selected.gist,
@@ -445,6 +466,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             return promise;
         };
 
+        console.log("\n\n *** home 15 ***\n\n");
         $scope.remove = function (linkedItem) {
             var api = linkedItem.orgId ? 'org' : 'repo';
             var removeArgs = linkedItem.orgId ? {
@@ -459,10 +481,12 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             });
         };
 
+        console.log("\n\n *** home 16 ***\n\n");
         $scope.isActive = function (viewLocation) {
             return viewLocation === $location.url();
         };
 
+        console.log("\n\n *** home 17 ***\n\n");
         $scope.groupDefaultCla = function (gist) {
             var found = false;
 
@@ -481,6 +505,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             return item.full_name ? 'Repositories' : 'Organisations';
         };
 
+        console.log("\n\n *** home 18 ***\n\n");
         var handleNullCla = function (item) {
             var clearDropdown = function (item) {
                 if (item && $scope.isRepo(item)) {
@@ -517,9 +542,11 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
             // return !$state.current.name.includes('repo');
             return true; // show our TOS everywhere again
         };
+        console.log("\n\n *** home 19 ***\n\n");
     }
 ])
     .directive('feature', ['$window', function () {
+        console.log( "\n\n *** feature ***\n\n" );
         return {
             templateUrl: '/assets/templates/feature.html',
             scope: {
@@ -531,6 +558,7 @@ module.controller('HomeCtrl', ['$rootScope', '$scope', '$RPCService', '$RAW', '$
         };
     }])
     .directive('textSlider', ['$window', '$timeout', function ($window, $timeout) {
+        console.log("\n\n *** textSlider ***\n\n");
         return {
             scope: {
                 time: '@',
